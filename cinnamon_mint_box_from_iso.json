@@ -1,0 +1,40 @@
+{
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "vm_name": "linuxmint-21.3-cinnamon",
+      "http_directory": "http",
+      "boot_command": [
+        "<esc><wait><tab><wait><leftCtrlOn>u<leftCtrlOff>",
+        "/casper/vmlinuz initrd=/casper/initrd.lz",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/linux_mint_preseed.cfg<wait>",
+        " automatic-ubiquity debug-ubiquity boot=casper nosplash noprompt",
+        " -- ",
+        "<enter><wait10m>",
+        "<leftCtrlOn><leftAltOn>t<leftAltOff><leftCtrlOff><wait>",
+        "echo 'pulsar' | sudo -S apt update<enter><wait60>",
+        "echo 'pulsar' | sudo -S apt install -y openssh-server build-essential<enter><wait60>",
+        "echo 'pulsar' | sudo -S bash -c 'echo \"pulsar ALL=(ALL) NOPASSWD: ALL\" > /etc/sudoers'<enter><wait10>",
+        "echo 'pulsar' | sudo -S reboot now<enter><wait120>"
+      ],
+
+      "disk_size": "40960",
+      "memory": "2048",
+      "guest_os_type": "Ubuntu_64",
+      "iso_checksum": "sha256:5aa24abbc616807ab754a6a3b586f24460b0c213b6cacb0bf8b9a80b65013ecc",
+      "iso_url": "https://mirror.aarnet.edu.au/pub/linuxmint/stable/21.3/linuxmint-21.3-cinnamon-64bit.iso",
+
+      "shutdown_command": "echo 'pulsar' | sudo -S shutdown -P now",
+
+      "ssh_port": 22,
+      "ssh_username": "pulsar",
+      "ssh_password": "pulsar"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "manifest",
+      "output": "stage-1-manifest.json"
+    }
+  ]
+}

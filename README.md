@@ -1,6 +1,14 @@
 # pulsar_vm
 Scripts for creating virtual machines for pulsar software
 
+## Required software
+
+- [Vagrant](https://www.vagrantup.com/)
+- [Packer](https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli)
+- [VirtualBox](https://www.virtualbox.org/)
+
+## Method
+
 
 Created a base virtaulbox ova file with
 
@@ -30,7 +38,7 @@ vagrant up --provider virtualbox
 ```
 
 Once it's finished provisioning (installing software) shut down the VM.
-Open VirtualBox and export the VM as an `.ova` file.
+Open VirtualBox, find the VM you just created, and export the VM as an `.ova` file.
 
 
 ## Method that should work that doesn't

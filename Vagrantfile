@@ -130,15 +130,12 @@ Vagrant.configure("2") do |config|
     pip install -U \
       cython \
       scikit-image  \
-      numpy
+      numpy==1.23.0
     pip install -U \
       pandas \
       matplotlib \
       astropy \
-      scipy \
-      psrdb==3.0.2 \
-      git+https://github.com/danielreardon/MeerGuard \
-      git+https://github.com/danielreardon/scintools.git
+      scipy
   SHELL
 
   config.vm.provision "swig", type: "shell", inline: <<-SHELL
@@ -270,11 +267,11 @@ Vagrant.configure("2") do |config|
     cd $PSRHOME
     git clone https://github.com/nanograv/enterprise.git
     cd enterprise
-    pip install numpy
     pip install -r requirements.txt
     export TEMPO2_PREFIX=$TEMPO2
     pip install libstempo jupyter
     pip install .
+    pip install git+https://github.com/nanograv/enterprise_extensions@master
   SHELL
 
   # Add in the worksho files

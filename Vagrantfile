@@ -285,4 +285,20 @@ Vagrant.configure("2") do |config|
     vb.memory = "8192"
     vb.cpus   = 8
   end
+
+  config.vm.provider "qemu" do |qe|
+    qe.gui = true
+    qe.qemu_dir = "/home/linuxbrew/.linuxbrew/share/qemu"
+    qe.machine = "virt,highmem=on"
+
+    qe.memory = "8192"
+    qe.arch="x86_64"
+    # need for x86_64
+    qe.machine = "q35"
+    qe.cpu = "max"
+    qe.net_device = "virtio-net-pci"
+
+    # it seems this box need a VGA device (the debug serial port doesn't work... I don't know why)
+    qe.extra_qemu_args = %w(-vga std)
+  end
 end
